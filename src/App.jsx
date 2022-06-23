@@ -7,10 +7,10 @@ import Message from './components/Message';
 
 import './styles/root.scss';
 
+const NEW_GAME = { board: Array(9).fill(null), isXNext: false };
+
 export default function App() {
-  const [history, setHistory] = useState([
-    { board: Array(9).fill(null), isXNext: false },
-  ]);
+  const [history, setHistory] = useState([NEW_GAME]);
 
   const [currentMove, setCurrentMove] = useState(0);
 
@@ -39,11 +39,20 @@ export default function App() {
     setCurrentMove(move);
   };
 
+  const setNewGame = () => {
+    setHistory([NEW_GAME]);
+    setCurrentMove(0);
+  };
+
   return (
     <div className="app">
       <h1>TIC TAC TOE</h1>
       <Message winner={winner} current={current} />
       <Board board={current.board} handleClick={handleClick} />
+      <button type="button" onClick={() => setNewGame()}>
+        {' '}
+        Start New Game
+      </button>
       <History history={history} moveTo={moveTo} currentMove={currentMove} />
     </div>
   );
