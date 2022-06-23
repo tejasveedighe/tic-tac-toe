@@ -1,23 +1,7 @@
 import React, { useState } from 'react';
 import { Square } from './Square';
 
-export const Board = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(false);
-
-  const handleClick = position => {
-    setBoard(prev => {
-      return prev.map((square, pos) => {
-        if (pos === position) {
-          return isXNext ? 'X' : 'O';
-        }
-        return square;
-      });
-    });
-
-    setIsXNext(prev => !prev);
-  };
-
+export const Board = ({ board, handleClick }) => {
   const renderSquare = position => {
     return (
       <Square value={board[position]} onClick={() => handleClick(position)} />
