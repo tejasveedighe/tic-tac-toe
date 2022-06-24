@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Square } from './Square';
 
-export const Board = ({ board, handleClick }) => {
+export const Board = ({ board, handleClick, winningSquares }) => {
   const renderSquare = position => {
+    const isWinningSquare = winningSquares.includes(position);
     return (
-      <Square value={board[position]} onClick={() => handleClick(position)} />
+      <Square
+        value={board[position]}
+        onClick={() => handleClick(position)}
+        isWinningSquare={isWinningSquare}
+      />
     );
   };
   return (
